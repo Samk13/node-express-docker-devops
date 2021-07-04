@@ -1,4 +1,24 @@
-start the container
+# How to start Docker container
+
+## for development:
+
+```zsh
+    docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+```
+
+## for production:
+
+```zsh
+    docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+```
+
+## take down the container:
+
+```zsh
+    docker-compose down -v
+```
+
+## info:
 
 ```zsh
  docker run -d -p 4000:4000 -v ${pwd}:/app -v /app/node_modules --name node-app node-app-image

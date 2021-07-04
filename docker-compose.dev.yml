@@ -1,0 +1,14 @@
+version: '3'
+services:
+  node-app:
+    volumes:
+      # :ro is for the volumes to be read-only
+      - ./:/app:ro
+      - /app/node_modules
+      # exclude DB from the volume read-only
+      - /app/src/db
+      # environment:
+      #   - PORT=4000
+    environment:
+      - NODE_ENV=development
+    command: yarn start:dev

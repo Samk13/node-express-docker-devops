@@ -1,7 +1,11 @@
 FROM node:latest
 WORKDIR /app
 COPY package.json .
-RUN yarn
+ARG NODE_ENV
+RUN if [ "$NODE_ENV" = "production" ]; \
+    then yarn; \
+    else yarn --only=production; \
+    fi
 COPY . .
 ENV PORT=4000
 EXPOSE $PORT

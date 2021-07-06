@@ -6,3 +6,12 @@ services:
       - '4000:4000'
     env_file:
       - ./.env
+  mongo:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=sanjeev
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      - mongodb:/data/db
+volumes:
+  mongodb:

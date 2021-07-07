@@ -11,8 +11,12 @@ services:
       - /app/node_modules
       # exclude DB from the volume read-only
       - /app/src/db
-      # environment:
-      #   - PORT=4000
     environment:
       - NODE_ENV=development
+      - MONGO_USER=sanjeev
+      - MONGO_PASS=password
     command: yarn start:dev
+  mongo:
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=sanjeev
+      - MONGO_INITDB_ROOT_PASSWORD=password

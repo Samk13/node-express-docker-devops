@@ -22,14 +22,23 @@ db.defaults({ discount_codes: [] }).write();
 const specs = swaggerJsDoc(swaggerOptions);
 const mongoURL =`mongodb://${MONGO_USER}:${MONGO_PASS}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`
 const app = express();
-mongoose.connect(mongoURL,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  }
- )
-  .then(() => { console.log("Connected to MongoDB."); })
-  .catch((err) => { console.log(err); });
+const connectWithRetry = () => {
+  mongoose.connect(mongoURL,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    }
+   )
+    .then(() => {
+      console.log("Connected to MongoDB 🙌🏼")
+    })
+    .catch((err) => {
+      console.log(err)
+      setTimeout(connectWithRetry, 4000);
+     });
+};
+connectWithRetry()
+
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 

@@ -29,7 +29,6 @@ const getDiscountCodeById = async (req, res) => {
   }
 }
 
-
 const setDiscountCode = async (req, res) => {
   try {
     res.send(await writeDiscount(req))
